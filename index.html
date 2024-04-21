@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modal</title>
+  </head>
+  <style>
+    
+    .show-modal {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #333;
+      line-height: 1.5;
+      padding: 0.75rem 1.35rem;
+      border: none;
+      background-color: #ececec;
+      background-repeat: 10rem;
+      cursor: pointer;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 1.2rem;
+      right: 2rem;
+      font-size: 1.5rem;
+      color: #333;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .modal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+      background-color: #fff;
+      padding: 4rem;
+      border-radius: 5px;
+      box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+      z-index: 10;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(3px);
+      z-index: 5;
+    }
+  </style>
+  <body>
+    <a class="show-modal">a-Tag Mehr Infos</a>
+    <button class="show-modal">Mehr Infos 2</button>
+    <button class="show-modal">Mehr Infos 3</button>
+
+    <div class="overlay hidden"></div>
+    <div class="modal hidden">
+      <button class="close-modal">&times;</button>
+      <h2>Modal Fenster</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore
+        commodi corporis error nemo impedit quisquam quam. Quam velit optio hic
+        necessitatibus at itaque quaerat sint, atque dicta vel doloribus et
+        quia. Rem, ipsa! Voluptas animi, omnis dolore quibusdam, exercitationem
+        aut commodi magnam quaerat quasi culpa praesentium minima quos fuga
+        molestiae.
+      </p>
+    </div>
+    <script>
+      const modal = document.querySelector(".modal");
+      const overlay = document.querySelector(".overlay");
+      const btnCloseModal = document.querySelector(".close-modal");
+      const btnsOpenModal = document.querySelectorAll(".show-modal");
+
+      const openModal = function () {
+        modal.classList.remove("hidden");
+        overlay.classList.remove("hidden");
+      };
+
+      const closeModal = function () {
+        modal.classList.add("hidden");
+        overlay.classList.add("hidden");
+      };
+
+      for (let i = 0; i < btnsOpenModal.length; i++)
+        btnsOpenModal[i].addEventListener("click", openModal);
+
+      btnCloseModal.addEventListener("click", closeModal);
+      overlay.addEventListener("click", closeModal);
+
+      document.addEventListener("keydown", function (e) {
+
+        if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+          closeModal();
+        }
+      });
+    </script>
+  </body>
+</html>
